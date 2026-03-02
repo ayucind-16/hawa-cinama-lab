@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HAWA CINEMA LAB | Production Bible Generator</title>
     
-    <link rel="icon" type="image/jpg" href="gemini-image-2_Cinematic_poster_for_HAWA_CINEMA_LAB_ultra-detailed_rendering_realistic_style_8k-1.jpg">
+    <link rel="icon" type="image/png" href="logo-anda.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
@@ -40,17 +40,17 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
                     <span class="label-style">1. Story Narrative Idea</span>
-                    <textarea id="storyInput" rows="6" placeholder="Masukkan ide filmmu (Bisa Bahasa Indonesia)..."></textarea>
+                    <textarea id="storyInput" rows="6" placeholder="Tulis jalan ceritanya di sini..."></textarea>
                 </div>
                 <div class="space-y-4">
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <span class="label-style">2. Main Character</span>
-                            <input id="mainCharInput" type="text" placeholder="Nama/Ciri Karakter">
+                            <input id="mainCharInput" type="text" placeholder="Nama Karakter Utama">
                         </div>
                         <div>
                             <span class="label-style">3. Side Character</span>
-                            <input id="sideCharInput" type="text" placeholder="Tokoh Pendukung">
+                            <input id="sideCharInput" type="text" placeholder="Nama Karakter Sampingan">
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
@@ -66,11 +66,11 @@
                         <div>
                             <span class="label-style">5. Visual Style</span>
                             <select id="styleInput">
-                                <option value="Hyper-Realistic, cinematic 8k, photorealistic textures">Hyper-Realistic</option>
-                                <option value="3D Pixar style, vibrant render, global illumination">3D Pixar</option>
-                                <option value="3D Cartoon style, bold colors, stylized render">3D Cartoon</option>
-                                <option value="Claymation style, stop motion texture, high detail">Claymation</option>
-                                <option value="Cyberpunk, neon lighting, futuristic atmosphere">Cyberpunk</option>
+                                <option value="Hyper-Realistic, cinematic 8k, photorealistic">Hyper-Realistic</option>
+                                <option value="3D Pixar style, vibrant, soft lighting">3D Pixar</option>
+                                <option value="3D Cartoon style, stylized, bold colors">3D Cartoon</option>
+                                <option value="Claymation style, stop motion texture">Claymation</option>
+                                <option value="Cyberpunk, neon lighting, futuristic">Cyberpunk</option>
                             </select>
                         </div>
                     </div>
@@ -82,9 +82,8 @@
         </section>
 
         <section id="teaserSection" class="teaser-card">
-            <span class="label-style" style="color: #00ffcc;">🔥 MOVIE TEASER PROMO PROMPT (ENGLISH - FOR AI)</span>
+            <span class="label-style" style="color: #00ffcc;">🔥 MOVIE TEASER PROMO PROMPT (ENGLISH)</span>
             <div id="teaserPrompt" class="prompt-box" style="background: rgba(0, 255, 204, 0.05); color: #fff;"></div>
-            <p class="text-[9px] mt-2 text-gray-400 italic font-bold uppercase tracking-wider">*Copy this English prompt to Leonardo/Veo for a high-impact trailer.</p>
         </section>
 
         <section class="glass-card overflow-x-auto neon-border">
@@ -115,8 +114,8 @@
     <script>
         function generateCompleteBible() {
             const story = document.getElementById('storyInput').value;
-            let mainName = document.getElementById('mainCharInput').value || "THE PROTAGONIST";
-            let sideName = document.getElementById('sideCharInput').value || "THE SIDE CHARACTER";
+            let mainName = document.getElementById('mainCharInput').value || "PROTAGONIST";
+            let sideName = document.getElementById('sideCharInput').value || "SIDE CHARACTER";
             const style = document.getElementById('styleInput').value;
             const sceneCount = parseInt(document.getElementById('durationInput').value);
             const tbody = document.getElementById('bibleBody');
@@ -125,15 +124,14 @@
 
             if(!story) return alert("Sutradara, isi ide filmnya!");
 
-            tbody.innerHTML = `<tr><td colspan="6" class="text-center py-20 animate-pulse text-pink-500 font-bold uppercase">Synthesizing Cinematic Data...</td></tr>`;
-            teaserBox.style.display = "none";
-
-            const mainSeed = "#HAWA_SEED_" + Math.floor(Math.random() * 9999);
-            const angles = ["Extreme Close-up", "Cinematic Wide Shot", "Dolly Zoom Cinematic", "Low-angle heroic shot", "Dramatic tracking shot"];
+            tbody.innerHTML = `<tr><td colspan="6" class="text-center py-20 animate-pulse text-pink-500 font-bold uppercase">Synthesizing Your Vision...</td></tr>`;
+            
+            const mainSeed = "#HAWA_ID_" + Math.floor(Math.random() * 9999);
+            const angles = ["Extreme Close-up", "Cinematic Wide Shot", "Dolly Zoom", "Low-angle shot", "Tracking shot"];
             let html = "";
 
-            // AUTO-ENGLISH TEASER
-            teaserText.innerHTML = `[Style: ${style}] [Epic movie teaser montage of ${mainName.toUpperCase()} and ${sideName.toUpperCase()}] [Visual Story: Cinematic adaptation of the narrative] [High energy, volumetric lighting, motion blur, 8k, Master Seed: ${mainSeed}]`;
+            // TEASER PROMPT (Translate-ish style)
+            teaserText.innerHTML = `[Style: ${style}] [Epic Movie Teaser Montage] [Featuring: ${mainName} and ${sideName}] [Story Context: ${story}] [Cinematic lighting, 8k, Seed: ${mainSeed}]`;
 
             for(let i = 1; i <= sceneCount; i++) {
                 let focusLabel, actionEN, note, dialogue, audio;
@@ -141,27 +139,25 @@
 
                 if (rand < 0.4) {
                     focusLabel = mainName.toUpperCase();
-                    // Bagian ini sudah dipaksa Bahasa Inggris teknis
-                    actionEN = `Intense cinematic focus on ${mainName} performing a dramatic action related to the story theme. High facial detail. Visual Seed: ${mainSeed}.`;
-                    dialogue = `"Ini saatnya membuktikan segalanya."`;
-                    note = `Focus on micro-expressions of ${mainName}.`;
-                    audio = "Melancholic orchestral strings.";
+                    actionEN = `Cinematic scene of ${mainName} in the story: "${story}". Focused on ${mainName}'s actions and emotions. Master Seed: ${mainSeed}.`;
+                    dialogue = `${mainName}: "Semuanya akan berubah hari ini."`;
+                    note = `Pastikan konsistensi visual ${mainName}.`;
+                    audio = `SFX: Deep emotional orchestral for ${mainName}.`;
                 } else if (rand < 0.8) {
                     focusLabel = `${mainName.toUpperCase()} & ${sideName.toUpperCase()}`;
-                    actionEN = `Dynamic interaction between ${mainName} and ${sideName} within the cinematic environment. Perfect character consistency. Visual Seed: ${mainSeed}.`;
-                    dialogue = `(Interaksi antara ${mainName} dan ${sideName})`;
-                    note = `Maintain the dynamic bond between characters.`;
-                    audio = "Rhythmic cinematic percussion.";
+                    actionEN = `Interaction between ${mainName} and ${sideName} during the sequence of "${story}". Seed: ${mainSeed}.`;
+                    dialogue = `${mainName} & ${sideName}: (Dialog interaktif)`;
+                    note = `Fokus pada hubungan antara ${mainName} dan ${sideName}.`;
+                    audio = `Ambient: City/Nature sounds with rhythmic music.`;
                 } else {
                     focusLabel = "ENVIRONMENT";
-                    actionEN = `Sweeping environmental establishing shot, cinematic masterpiece, epic scale, hyper-detailed world building.`;
-                    dialogue = `(Hening...)`;
-                    note = "Set the atmosphere for the sequence.";
-                    audio = "Deep cinematic bass drone.";
+                    actionEN = `Wide establishing shot of the world of "${story}". High detail cinematic lighting.`;
+                    dialogue = `(Hening / Voice Over)`;
+                    note = "Set mood untuk lokasi cerita.";
+                    audio = "Deep cinematic soundscape drone.";
                 }
 
-                // Final Assembly: Full English
-                const finalPrompt = `[Style: ${style}] [Angle: ${angles[i % 5]}] [Action: ${actionEN}] [Spec: 8k, photorealistic, cinematic video, highly detailed]`;
+                const finalPrompt = `[Style: ${style}] [Angle: ${angles[i % 5]}] [Scene: ${actionEN}] [Quality: 8k, photorealistic, cinematic]`;
 
                 html += `
                     <tr>
@@ -170,13 +166,14 @@
                         <td><div class="prompt-box">${finalPrompt}</div></td>
                         <td class="italic text-pink-200">"${dialogue}"</td>
                         <td class="text-gray-400 border-l border-pink-500/20 pl-4 italic text-[11px]">${note}</td>
-                        <td class="text-blue-300 font-medium text-[10px]">SFX: ${audio}</td>
+                        <td class="text-blue-300 font-medium text-[10px] uppercase">${audio}</td>
                     </tr>`;
             }
+
             setTimeout(() => { 
                 tbody.innerHTML = html; 
                 teaserBox.style.display = "block";
-            }, 1200);
+            }, 1000);
         }
     </script>
 </body>
