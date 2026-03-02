@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HAWA CINEMA LAB | Production Bible Generator</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -16,142 +19,142 @@
         input, textarea, select { background: rgba(0,0,0,0.5) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: #fff !important; padding: 10px !important; width: 100%; border-radius: 8px; font-size: 0.8rem; }
         .btn-prod { background: linear-gradient(45deg, #ff00ff, #800080); font-family: 'Orbitron', sans-serif; transition: 0.3s; cursor: pointer; border-radius: 12px; }
         .btn-prod:hover { box-shadow: 0 0 25px #ff00ff; transform: translateY(-2px); }
-        th { font-family: 'Orbitron', sans-serif; font-size: 0.6rem; color: #ff00ff; padding: 15px; border-bottom: 1px solid #ff00ff44; text-transform: uppercase; }
+        th { font-family: 'Orbitron', sans-serif; font-size: 0.55rem; color: #ff00ff; padding: 15px; border-bottom: 1px solid #ff00ff44; text-transform: uppercase; }
         td { font-size: 0.75rem; padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: top; }
-        .prompt-box { background: rgba(0,0,0,0.4); padding: 10px; border-radius: 6px; border-left: 3px solid #ff00ff; font-style: italic; color: #ccc; line-height: 1.6; }
+        .prompt-box { background: rgba(0,0,0,0.4); padding: 10px; border-radius: 6px; border-left: 3px solid #ff00ff; font-style: italic; color: #ccc; line-height: 1.6; font-size: 0.7rem; }
+        .seed-badge { background: #ff00ff; color: black; font-weight: bold; padding: 2px 6px; border-radius: 4px; font-size: 10px; }
     </style>
 </head>
 <body class="p-4 md:p-10">
 
     <header class="text-center mb-10">
-        <p class="text-[10px] tracking-[0.5em] text-white/60 mb-1 uppercase font-bold">Digital Hawa Presents</p>
+        <p class="text-[10px] tracking-[0.5em] text-white/60 mb-1 uppercase font-bold italic">Digital Hawa Presents</p>
         <h1 class="text-4xl md:text-6xl hawa-header font-black">HAWA CINEMA LAB</h1>
-        <div class="h-1 w-24 bg-pink-600 mx-auto mt-4 rounded-full"></div>
+        <div class="h-1 w-24 bg-pink-600 mx-auto mt-4 rounded-full shadow-[0_0_10px_#ff00ff]"></div>
     </header>
 
-    <main class="max-w-[1600px] mx-auto space-y-8">
+    <main class="max-w-[1400px] mx-auto space-y-8">
         
         <section class="glass-card p-8 neon-border">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                
                 <div>
                     <span class="label-style">1. Story Narrative Idea</span>
-                    <textarea id="storyInput" rows="6" placeholder="Contoh: Lana berdiri di stasiun kereta yang sepi saat hujan deras..."></textarea>
+                    <textarea id="storyInput" rows="6" placeholder="Masukkan ide filmmu..."></textarea>
                 </div>
-
                 <div class="space-y-4">
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <span class="label-style">2. Main Character</span>
-                            <input id="mainCharInput" type="text" placeholder="Nama, Usia, Ciri...">
+                            <input id="mainCharInput" type="text" placeholder="Nama/Ciri Karakter">
                         </div>
                         <div>
                             <span class="label-style">3. Side Character</span>
-                            <input id="sideCharInput" type="text" placeholder="Opsional...">
+                            <input id="sideCharInput" type="text" placeholder="Tokoh Pendukung/Crowd">
                         </div>
                     </div>
-
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <span class="label-style">4. Duration</span>
                             <select id="durationInput">
-                                <option value="Teaser 30s">Teaser 30s</option>
-                                <option value="Short Movie 1m">Short Movie 1m</option>
-                                <option value="Cinematic 2m">Cinematic 2m</option>
+                                <option value="6">Teaser 30s (~6 Scenes)</option>
+                                <option value="12">Short Movie 1m (~12 Scenes)</option>
+                                <option value="20">Cinematic 2m (~20 Scenes)</option>
                             </select>
                         </div>
                         <div>
                             <span class="label-style">5. Visual Style</span>
                             <select id="styleInput">
-                                <option value="Hyper-Realistic, cinematic 8k, photorealistic">Hyper-Realistic</option>
+                                <option value="Hyper-Realistic, cinematic 8k">Hyper-Realistic</option>
                                 <option value="3D Pixar style, vibrant render">3D Pixar</option>
+                                <option value="3D Cartoon style, bold colors">3D Cartoon</option>
                                 <option value="Claymation style, stop motion texture">Claymation</option>
-                                <option value="Cyberpunk, neon lighting, moody">Cyberpunk</option>
+                                <option value="Cyberpunk, neon lighting">Cyberpunk</option>
                             </select>
                         </div>
                     </div>
-
-                    <button onclick="generateProductionBible()" class="btn-prod w-full py-4 text-white font-bold uppercase tracking-widest mt-2">Generate Production Bible 🎬</button>
+                    <button onclick="generateCompleteBible()" class="btn-prod w-full py-4 text-white font-bold uppercase tracking-widest mt-2">Generate Production Bible 🎬</button>
                 </div>
             </div>
         </section>
 
         <section class="glass-card overflow-x-auto neon-border">
-            <table class="w-full text-left border-collapse min-w-[1200px]">
+            <table class="w-full text-left border-collapse min-w-[1300px]">
                 <thead>
-                    <tr class="bg-black/40">
-                        <th width="60" class="text-center">SCENE</th>
-                        <th width="160">CHARACTER FOCUS</th>
-                        <th>MASTER PROMPT (FOR AI GENERATOR)</th>
-                        <th width="220">DIALOGUE / VO</th>
-                        <th width="220">DIRECTOR'S NOTE</th>
+                    <tr class="bg-black/40 text-center">
+                        <th width="100">SCENE</th>
+                        <th width="180">CHARACTER FOCUS</th>
+                        <th>MASTER PROMPT (CONSISTENCY LOCKED)</th>
+                        <th width="200">DIALOGUE / VO</th>
+                        <th width="200">DIRECTOR'S NOTE</th>
                         <th width="180">AUDIO / MUSIC</th>
                     </tr>
                 </thead>
                 <tbody id="bibleBody">
-                    <tr>
-                        <td colspan="6" class="text-center py-20 text-gray-500 italic uppercase tracking-widest">Awaiting Studio Command...</td>
-                    </tr>
+                    <tr><td colspan="6" class="text-center py-20 text-gray-500 italic uppercase tracking-[0.3em]">Awaiting Command...</td></tr>
                 </tbody>
             </table>
         </section>
+
+        <footer class="mt-20 mb-10 text-center">
+            <div class="h-[1px] w-full bg-gradient-to-r from-transparent via-pink-500/30 to-transparent mb-8"></div>
+            <p class="text-[11px] text-white/90 tracking-[0.4em] uppercase font-black">© 2026 HAWA CINEMA LAB. ALL RIGHTS RESERVED.</p>
+            <p class="text-[9px] text-pink-500/70 tracking-[0.6em] uppercase font-bold italic mt-2">Powered by Digital Hawa</p>
+        </footer>
     </main>
 
-    <footer class="mt-20 mb-10 text-center">
-        <p class="text-[11px] text-white/90 tracking-[0.4em] uppercase font-black">© 2026 HAWA CINEMA LAB. ALL RIGHTS RESERVED.</p>
-        <p class="text-[9px] text-pink-500/70 tracking-[0.6em] uppercase font-bold italic">Powered by Digital Hawa</p>
-    </footer>
-
     <script>
-        function generateProductionBible() {
+        function generateCompleteBible() {
             const story = document.getElementById('storyInput').value;
-            const mainChar = document.getElementById('mainCharInput').value;
-            const sideChar = document.getElementById('sideCharInput').value;
+            let mainName = document.getElementById('mainCharInput').value || "THE PROTAGONIST";
+            let sideName = document.getElementById('sideCharInput').value || "THE CROWD";
             const style = document.getElementById('styleInput').value;
-            const duration = document.getElementById('durationInput').value;
+            const sceneCount = parseInt(document.getElementById('durationInput').value);
             const tbody = document.getElementById('bibleBody');
 
-            if(!story || !mainChar) return alert("Sutradara, isi data cerita dan karakter!");
+            if(!story) return alert("Sutradara, isi ide ceritanya!");
 
-            tbody.innerHTML = `<tr><td colspan="6" class="text-center py-20 animate-pulse text-pink-500 font-bold uppercase tracking-[0.5em]">Constructing Production Bible...</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="6" class="text-center py-20 animate-pulse text-pink-500 font-bold uppercase">Synthesizing All Columns...</td></tr>`;
 
-            // Simulasi Output berdasarkan Format PDF
-            const scenes = [
-                {
-                    no: "1",
-                    focus: mainChar.toUpperCase() + " [MAIN]",
-                    prompt: `${style}, cinematic 85mm close-up. ${mainChar} in a setting of ${story}. Cinematic fog, professional lighting, 8k.`,
-                    dialogue: `"Mungkin ini adalah awal dari segalanya."`,
-                    note: "Establishing the mood and character's internal warmth.",
-                    audio: "Ambient rain, melancholic cello notes."
-                },
-                {
-                    no: "2",
-                    focus: sideChar ? sideChar.toUpperCase() + " [SIDE]" : "ENVIRONMENT",
-                    prompt: `${style}, mid-shot dolly zoom. ${sideChar ? sideChar : 'The world'} responding to the event: ${story}.`,
-                    dialogue: sideChar ? `"Aku sudah menunggumu."` : `(Atmospheric Silence)`,
-                    note: "Creating a sense of isolation or connection.",
-                    audio: "Deep bass drop, creaking wood sound."
+            const mainSeed = "#MAIN_" + Math.floor(Math.random() * 9999);
+            const angles = ["Cinematic 85mm Close-up", "Wide Angle Drone Shot", "Dolly Zoom Cinematic", "Low-angle heroic shot", "Over-the-shoulder shot"];
+            let html = "";
+
+            for(let i = 1; i <= sceneCount; i++) {
+                let focus, action, note, dialogue, audio;
+                const rand = Math.random();
+
+                if (rand < 0.4) {
+                    focus = `${mainName.toUpperCase()} [SOLO]`;
+                    action = `${mainName} alone in the world of ${story}. Seed: ${mainSeed}.`;
+                    dialogue = `"Ini saatnya membuktikan segalanya."`;
+                    note = "Membangun emosi personal karakter utama.";
+                    audio = "Atmospheric synth, solo piano.";
+                } else if (rand < 0.8) {
+                    focus = `${mainName.toUpperCase()} & ${sideName.toUpperCase()}`;
+                    action = `${mainName} interacting with ${sideName} in ${story}. Seed: ${mainSeed}.`;
+                    dialogue = `(Suara latar belakang dari ${sideName})`;
+                    note = "Interaksi sosial memperluas dunia cerita.";
+                    audio = "Busy street ambiance, rhythmic music.";
+                } else {
+                    focus = "ATMOSPHERE";
+                    action = `Cinematic wide view of the environment: ${story}. High detail.`;
+                    dialogue = `(Hening...)`;
+                    note = "Establishing shot untuk mood lokasi.";
+                    audio = "Deep cinematic soundscape.";
                 }
-            ];
 
-            setTimeout(() => {
-                tbody.innerHTML = "";
-                scenes.forEach(s => {
-                    tbody.innerHTML += `
-                        <tr>
-                            <td class="text-center font-bold text-pink-500 italic">${s.no}</td>
-                            <td class="font-bold text-white">${s.focus}</td>
-                            <td><div class="prompt-box">${s.prompt}</div></td>
-                            <td class="italic text-pink-200">${s.dialogue}</td>
-                            <td class="text-gray-400 border-l border-pink-500/20 pl-4">${s.note}</td>
-                            <td class="text-blue-300 font-medium text-[11px]">${s.audio}</td>
-                        </tr>
-                    `;
-                });
-            }, 1200);
+                html += `
+                    <tr>
+                        <td class="text-center font-bold text-pink-500 uppercase text-[11px]">SCENE ${i}</td>
+                        <td class="font-bold text-white uppercase text-[11px]">${focus}<br><span class="seed-badge">${mainSeed}</span></td>
+                        <td><div class="prompt-box">${style}, ${angles[i % 5]}, ${action} 8k cinematic.</div></td>
+                        <td class="italic text-pink-200">"${dialogue}"</td>
+                        <td class="text-gray-400 border-l border-pink-500/20 pl-4 italic text-[11px]">${note}</td>
+                        <td class="text-blue-300 font-medium text-[10px]">SFX: ${audio}</td>
+                    </tr>`;
+            }
+            setTimeout(() => { tbody.innerHTML = html; }, 1500);
         }
     </script>
 </body>
 </html>
-
